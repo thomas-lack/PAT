@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CardModule } from "primeng";
-import { SharedModule } from '../shared/shared.module';
+import {NgModule} from "@angular/core";
+import {CardModule} from "primeng";
+import {SharedModule} from "../shared/shared.module";
 
-import { HomeRoutingModule } from './home-routing.module';
+import {HomeRoutingModule} from "./home-routing.module";
 
-import { HomeComponent } from './home.component';
+import {HomeComponent} from "./home.component";
 
 @NgModule({
 	declarations: [HomeComponent],
