@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /build
+/release
 /tmp
 /out-tsc
 /src/**/*.js
