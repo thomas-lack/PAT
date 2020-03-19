@@ -1,0 +1,20 @@
+<p>
+	<a href="#" routerLink="/">Zurück</a>
+</p>
+
+<p-table [value]="patienten | async">
+	<ng-template pTemplate="header">
+		<tr>
+			<th>Name</th>
+			<th>Erstellt</th>
+			<th>Geändert</th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-patient>
+		<tr>
+			<td>{{patient.name}}</td>
+			<td>{{patient.creationDate | date:"short":undefined:"de-DE"}}</td>
+			<td>{{patient.updatedOn | date:"short":undefined:"de-DE"}}</td>
+		</tr>
+	</ng-template>
+</p-table>
