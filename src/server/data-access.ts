@@ -20,15 +20,11 @@ export class DataAccess {
 		this.sequelize.close();
 	}
 
+	public async getPatienten(): Promise<Patient[]> {
+		return Patient.findAll();
+	}
+
 	private async initDb() {
 		await this.sequelize.sync();
-
-		const patienten = await Patient.findAll({
-			where: {
-				name: "Test Patient1",
-			},
-		});
-
-		console.log("patienten", patienten);
 	}
 }
