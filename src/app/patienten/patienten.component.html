@@ -1,6 +1,36 @@
-<p>
-	<a href="#" routerLink="/">Zurück</a>
-</p>
+<p-toolbar>
+	<div class="ui-toolbar-group-left">
+		<button
+			pButton
+			type="button"
+			label="Zurück"
+			icon="pi pi-arrow-left"
+			class="ui-button-secondary"
+			routerLink="/"
+		></button>
+		<button
+			pButton
+			type="button"
+			label="Neu"
+			icon="pi pi-plus"
+			routerLink="/patient"
+		></button>
+	</div>
+
+	<div class="ui-toolbar-group-right">
+		<button
+			pButton
+			type="button"
+			icon="pi pi-search"
+		></button>
+		<button
+			pButton
+			type="button"
+			icon="pi pi-times"
+			class="ui-button-danger"
+		></button>
+	</div>
+</p-toolbar>
 
 <p-table [value]="patienten | async">
 	<ng-template pTemplate="header">
@@ -10,7 +40,10 @@
 			<th>Geändert</th>
 		</tr>
 	</ng-template>
-	<ng-template pTemplate="body" let-patient>
+	<ng-template
+		pTemplate="body"
+		let-patient
+	>
 		<tr>
 			<td>{{patient.name}}</td>
 			<td>{{patient.creationDate | date:"short":undefined:"de-DE"}}</td>
