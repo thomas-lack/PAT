@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {from, Observable} from "rxjs";
-import {DataAccess} from "../../../data-access";
+import {DataAccess} from "../../../server/data-access";
 import {ElectronService} from "../core/services";
 
 @Injectable({
@@ -11,7 +11,7 @@ export class PatientenService {
 	private readonly dataAccess: DataAccess;
 
 	constructor(private electronService: ElectronService) {
-		const DataAccessModule = electronService.remote.require("./data-access");
+		const DataAccessModule = electronService.remote.require("./server/data-access");
 		this.dataAccess = new DataAccessModule.DataAccess();
 	}
 
