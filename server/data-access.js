@@ -34,6 +34,11 @@ class DataAccess {
             yield this.sequelize.sync();
         });
     }
+    create(patient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.create(patient);
+        });
+    }
 }
 exports.DataAccess = DataAccess;
 //# sourceMappingURL=data-access.js.map

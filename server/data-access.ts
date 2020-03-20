@@ -27,4 +27,8 @@ export class DataAccess {
 	private async initDb() {
 		await this.sequelize.sync();
 	}
+
+	public async create(patient: any): Promise<Patient> {
+		return Patient.create(patient);
+	}
 }
