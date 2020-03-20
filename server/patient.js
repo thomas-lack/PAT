@@ -14,6 +14,7 @@ let Patient = class Patient extends sequelize_typescript_1.Model {
 };
 __decorate([
     sequelize_typescript_1.AllowNull(false),
+    sequelize_typescript_1.Unique,
     sequelize_typescript_1.Column,
     __metadata("design:type", String)
 ], Patient.prototype, "name", void 0);
