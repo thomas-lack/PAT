@@ -1,12 +1,12 @@
 import {app, BrowserWindow, screen} from "electron";
 import * as path from "path";
 import * as url from "url";
-import {DataAccess} from "./src/server/data-access";
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1);
 const serve = args.some((val: string) => val === "--serve");
-const dataAccess = new DataAccess();
+
+// const dataAccess = new DataAccess();
 
 function createWindow(): BrowserWindow {
 
@@ -15,8 +15,13 @@ function createWindow(): BrowserWindow {
 
 	// Create the browser window.
 	win = new BrowserWindow({
-		x: 0, y: 0, width: size.width, height: size.height, webPreferences: {
-			nodeIntegration: true, allowRunningInsecureContent: serve,
+		x: 0,
+		y: 0,
+		width: size.width,
+		height: size.height,
+		webPreferences: {
+			nodeIntegration: true,
+			allowRunningInsecureContent: serve,
 		},
 	});
 
@@ -28,7 +33,9 @@ function createWindow(): BrowserWindow {
 	}
 	else {
 		win.loadURL(url.format({
-			pathname: path.join(__dirname, "dist/index.html"), protocol: "file:", slashes: true,
+			pathname: path.join(__dirname, "dist/index.html"),
+			protocol: "file:",
+			slashes: true,
 		}));
 	}
 
@@ -60,7 +67,6 @@ try {
 		// to stay active until the user quits explicitly with Cmd + Q
 		if (process.platform !== "darwin") {
 			app.quit();
-			dataAccess.quit();
 		}
 	});
 

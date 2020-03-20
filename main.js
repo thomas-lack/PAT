@@ -3,18 +3,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path = require("path");
 const url = require("url");
-const data_access_1 = require("./src/server/data-access");
 let win = null;
 const args = process.argv.slice(1);
 const serve = args.some((val) => val === "--serve");
-const dataAccess = new data_access_1.DataAccess();
+// const dataAccess = new DataAccess();
 function createWindow() {
     const electronScreen = electron_1.screen;
     const size = electronScreen.getPrimaryDisplay().workAreaSize;
     // Create the browser window.
     win = new electron_1.BrowserWindow({
-        x: 0, y: 0, width: size.width, height: size.height, webPreferences: {
-            nodeIntegration: true, allowRunningInsecureContent: serve,
+        x: 0,
+        y: 0,
+        width: size.width,
+        height: size.height,
+        webPreferences: {
+            nodeIntegration: true,
+            allowRunningInsecureContent: serve,
         },
     });
     if (serve) {
@@ -25,7 +29,9 @@ function createWindow() {
     }
     else {
         win.loadURL(url.format({
-            pathname: path.join(__dirname, "dist/index.html"), protocol: "file:", slashes: true,
+            pathname: path.join(__dirname, "dist/index.html"),
+            protocol: "file:",
+            slashes: true,
         }));
     }
     if (serve) {
@@ -51,7 +57,6 @@ try {
         // to stay active until the user quits explicitly with Cmd + Q
         if (process.platform !== "darwin") {
             electron_1.app.quit();
-            dataAccess.quit();
         }
     });
     electron_1.app.on("activate", () => {

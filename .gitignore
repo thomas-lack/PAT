@@ -3,9 +3,13 @@
 # compiled output
 /dist
 /build
+/release
 /tmp
 /out-tsc
+/*.js
+/*.js.map
 /src/**/*.js
+/src/**/*.js.map
 # Only exists if Bazel was run
 /bazel-out
 
