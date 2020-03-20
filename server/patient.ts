@@ -1,9 +1,10 @@
-import {AllowNull, Column, CreatedAt, Model, Table, UpdatedAt} from "sequelize-typescript";
+import {AllowNull, Column, CreatedAt, Model, Table, Unique, UpdatedAt} from "sequelize-typescript";
 
 @Table
 export class Patient extends Model<Patient> {
 
 	@AllowNull(false)
+	@Unique
 	@Column
 	name!: string;
 
