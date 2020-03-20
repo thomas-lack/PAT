@@ -9,27 +9,32 @@ import "reflect-metadata";
 import "../polyfills";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
-import {CoreModule} from "./core/core.module";
+import {ElectronService} from "./electron/electron.service";
 import {HomeModule} from "./home/home.module";
-import {PatientenModule} from "./patienten/patienten.module";
+import {PatientComponent} from "./patient/patient.component";
+import {PatientenComponent} from "./patienten/patienten.component";
 import {SharedModule} from "./shared/shared.module";
 
 registerLocaleData(localeDe, "de-DE");
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [
+		AppComponent,
+		PatientComponent,
+		PatientenComponent,
+	],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
 		HttpClientModule,
-		CoreModule,
 		SharedModule,
 		HomeModule,
 		AppRoutingModule,
-		PatientenModule,
 	],
-	providers: [],
+	providers: [
+		ElectronService,
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {
