@@ -7,6 +7,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import "reflect-metadata";
 import "../polyfills";
+import {MessageService} from "primeng";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
 import {ElectronService} from "./electron/electron.service";
@@ -34,6 +35,7 @@ registerLocaleData(localeDe, "de-DE");
 	],
 	providers: [
 		ElectronService,
+		MessageService,
 	],
 	bootstrap: [AppComponent],
 })
