@@ -6,8 +6,6 @@ let win: BrowserWindow = null;
 const args = process.argv.slice(1);
 const serve = args.some((val: string) => val === "--serve");
 
-// const dataAccess = new DataAccess();
-
 function createWindow(): BrowserWindow {
 
 	const electronScreen = screen;
@@ -30,8 +28,7 @@ function createWindow(): BrowserWindow {
 			electron: require(`${__dirname}/node_modules/electron`),
 		});
 		win.loadURL("http://localhost:4200");
-	}
-	else {
+	} else {
 		win.loadURL(url.format({
 			pathname: path.join(__dirname, "dist/index.html"),
 			protocol: "file:",

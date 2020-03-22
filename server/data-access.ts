@@ -1,18 +1,23 @@
+import {app} from "electron";
 import {Sequelize} from "sequelize-typescript";
 import {Patient} from "./patient";
 
-const DATABASE_PATH = "./pat.db";
+const DATABASE_PATH = `${app.getPath("userData")}/databases/pat.db`;
 
 export class DataAccess {
 
 	private sequelize: Sequelize;
 
 	constructor() {
-		this.sequelize = new Sequelize({
-			dialect: "sqlite",
-			storage: DATABASE_PATH,
-			models: [Patient],
-		});
+		try {
+			this.sequelize = new Sequelize({
+				dialect: "sqlite",
+				storage: DATABASE_PATH,
+				models: [Patient],
+			});
+		} catch (e) {
+			console.error(e);
+		}
 		this.initDb();
 	}
 
@@ -24,11 +29,15 @@ export class DataAccess {
 		return Patient.findAll();
 	}
 
-	private async initDb() {
-		await this.sequelize.sync();
-	}
-
 	public async create(patient: any): Promise<Patient> {
 		return Patient.create(patient);
+	}
+
+	private async initDb() {
+		try {
+			await this.sequelize.sync();
+		} catch (e) {
+			console.error(e);
+		}
 	}
 }
