@@ -15,10 +15,14 @@ export class PatientenService {
 
 	constructor(
 		private electronService: ElectronService,
-		private messageService: MessageService
+		private messageService: MessageService,
 	) {
 		const DataAccessModule = electronService.remote.require("./server/data-access");
 		this.dataAccess = new DataAccessModule.DataAccess();
+	}
+
+	public getPatientById(id: number): Observable<any> {
+		return from(this.dataAccess.getPatientById(id));
 	}
 
 	public getPatienten(): Observable<any> {
@@ -27,7 +31,7 @@ export class PatientenService {
 
 	public async create(patient: Patient) {
 		try {
-			const persistedPatient: Model = await this.dataAccess.create(patient);
+			const persistedPatient: Model = await this.dataAccess.createPatient(patient);
 			this.messageService.add({
 				severity: "success",
 				summary: "Patient erfolgreich angelegt",
@@ -37,6 +41,22 @@ export class PatientenService {
 			this.messageService.add({
 				severity: "error",
 				summary: `Patient konnte nicht angelegt werden - Grund: ${this.parseErrorToReason(e)}`,
+			});
+		}
+	}
+
+	public async update(patient: Patient) {
+		try {
+			const persistedPatient = await this.dataAccess.updatePatient(patient);
+			this.messageService.add({
+				severity: "success",
+				summary: "Patient erfolgreich bearbeitet",
+			});
+			return persistedPatient;
+		} catch (e) {
+			this.messageService.add({
+				severity: "error",
+				summary: `Patient konnte nicht bearbeitet werden - Grund: ${this.parseErrorToReason(e)}`,
 			});
 		}
 	}
