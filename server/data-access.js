@@ -9,29 +9,60 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const electron_1 = require("electron");
 const sequelize_typescript_1 = require("sequelize-typescript");
 const patient_1 = require("./patient");
-const DATABASE_PATH = "./pat.db";
+const DATABASE_PATH = `${electron_1.app.getPath("userData")}/databases/pat.db`;
 class DataAccess {
     constructor() {
-        this.sequelize = new sequelize_typescript_1.Sequelize({
-            dialect: "sqlite",
-            storage: DATABASE_PATH,
-            models: [patient_1.Patient],
-        });
+        try {
+            this.sequelize = new sequelize_typescript_1.Sequelize({
+                dialect: "sqlite",
+                storage: DATABASE_PATH,
+                models: [patient_1.Patient],
+            });
+        }
+        catch (e) {
+            console.error(e);
+        }
         this.initDb();
     }
     quit() {
         this.sequelize.close();
+    }
+    getPatientById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.findOne({ where: { id } });
+        });
     }
     getPatienten() {
         return __awaiter(this, void 0, void 0, function* () {
             return patient_1.Patient.findAll();
         });
     }
+    createPatient(patient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.create(patient);
+        });
+    }
+    updatePatient(patient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.update({ name: patient.name }, { where: { id: patient.id } });
+        });
+    }
+    destroyPatient(patient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.destroy({ where: { id: patient.id } });
+        });
+    }
     initDb() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.sequelize.sync();
+            try {
+                yield this.sequelize.sync();
+            }
+            catch (e) {
+                console.error(e);
+            }
         });
     }
 }

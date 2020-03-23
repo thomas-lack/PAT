@@ -1,0 +1,39 @@
+<p-toolbar>
+	<div class="ui-toolbar-group-left">
+		<button
+			pButton
+			type="button"
+			label="Zurück"
+			icon="pi pi-arrow-left"
+			class="ui-button-secondary"
+			patBackButton
+		></button>
+	</div>
+</p-toolbar>
+
+<form
+	[formGroup]="patientFormGroup"
+	(ngSubmit)="onSubmit()"
+>
+	<h1>{{ patient ? 'Patient #' + patient.id + ' bearbeiten' : 'Patient erstellen' }}</h1>
+
+	<div class="input-field">
+		<label for="nameInput">Name</label>
+		<input
+			id="nameInput"
+			formControlName="name"
+			type="text"
+			size="30"
+			pInputText
+			required
+		>
+	</div>
+
+	<button
+		pButton
+		type="submit"
+		[label]=" patient ? 'Patient speichern' : 'Patient erstellen'"
+		[icon]="isTxInProgress ? 'pi pi-spin pi-spinner' : 'pi pi-save'"
+		[disabled]="!patientFormGroup.valid || isTxInProgress"
+	></button>
+</form>

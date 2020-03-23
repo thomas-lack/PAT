@@ -1,20 +1,50 @@
-<p>
-	<a href="#" routerLink="/">Zurück</a>
-</p>
+<p-toolbar>
+	<div class="ui-toolbar-group-left">
+		<button
+			pButton
+			type="button"
+			label="Zurück"
+			icon="pi pi-arrow-left"
+			class="ui-button-secondary"
+			routerLink="/"
+		></button>
+		<button
+			pButton
+			type="button"
+			label="Neu"
+			icon="pi pi-plus"
+			routerLink="/patient"
+		></button>
+	</div>
+</p-toolbar>
 
-<p-table [value]="patienten | async">
+<p-table
+	[value]="patienten | async"
+	[(contextMenuSelection)]="selectedPatient"
+	[contextMenu]="cm"
+>
 	<ng-template pTemplate="header">
 		<tr>
+			<th>Id</th>
 			<th>Name</th>
 			<th>Erstellt</th>
 			<th>Geändert</th>
 		</tr>
 	</ng-template>
-	<ng-template pTemplate="body" let-patient>
-		<tr>
+	<ng-template
+		pTemplate="body"
+		let-patient
+	>
+		<tr [pContextMenuRow]="patient">
+			<td>{{patient.id}}</td>
 			<td>{{patient.name}}</td>
 			<td>{{patient.creationDate | date:"short":undefined:"de-DE"}}</td>
 			<td>{{patient.updatedOn | date:"short":undefined:"de-DE"}}</td>
 		</tr>
 	</ng-template>
 </p-table>
+
+<p-contextMenu
+	#cm
+	[model]="editMenuItems"
+></p-contextMenu>

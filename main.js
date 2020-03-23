@@ -6,7 +6,6 @@ const url = require("url");
 let win = null;
 const args = process.argv.slice(1);
 const serve = args.some((val) => val === "--serve");
-// const dataAccess = new DataAccess();
 function createWindow() {
     const electronScreen = electron_1.screen;
     const size = electronScreen.getPrimaryDisplay().workAreaSize;
