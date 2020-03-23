@@ -20,11 +20,12 @@ export class PatientenComponent implements OnInit {
 		{
 			label: "Bearbeiten",
 			icon: "pi pi-fw pi-pencil",
-			command: () => this.onPatientBearbeitenClick(this.selectedPatient),
+			command: () => this.onEditPatientClick(this.selectedPatient),
 		},
 		{
 			label: "Löschen",
 			icon: "pi pi-fw pi-trash",
+			command: () => this.onDestroyPatientClick(this.selectedPatient),
 		},
 	];
 
@@ -35,14 +36,23 @@ export class PatientenComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.patienten = this.patientenService.getPatienten();
+		this.getPatienten();
 	}
 
 	onBackButtonClick() {
 		this.router.navigate(["/"]);
 	}
 
-	onPatientBearbeitenClick(patient: Patient) {
+	private getPatienten() {
+		this.patienten = this.patientenService.getPatienten();
+	}
+
+	private onEditPatientClick(patient: Patient) {
 		this.router.navigate(["/patient", patient.id]);
+	}
+
+	private onDestroyPatientClick(patient: Patient) {
+		this.patientenService.destroy(patient);
+		this.getPatienten();
 	}
 }
