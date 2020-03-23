@@ -14,6 +14,10 @@ const routes: Routes = [
 		component: PatientComponent,
 	},
 	{
+		path: "patient/:id",
+		component: PatientComponent,
+	},
+	{
 		path: "patienten",
 		component: PatientenComponent,
 	},
