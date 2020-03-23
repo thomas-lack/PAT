@@ -61,6 +61,22 @@ export class PatientenService {
 		}
 	}
 
+	public async destroy(patient: Patient) {
+		try {
+			const destroyedPatient = await this.dataAccess.destroyPatient(patient);
+			this.messageService.add({
+				severity: "success",
+				summary: "Patient erfolgreich gelöscht",
+			});
+			return destroyedPatient;
+		} catch (e) {
+			this.messageService.add({
+				severity: "error",
+				summary: `Patient konnte nicht gelöscht werden - Grund: ${this.parseErrorToReason(e)}`,
+			});
+		}
+	}
+
 	private parseErrorToReason(e: Error): string {
 		let reason = "Unbekannt";
 		if (e.name === "SequelizeUniqueConstraintError") {
