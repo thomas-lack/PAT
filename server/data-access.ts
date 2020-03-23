@@ -25,12 +25,20 @@ export class DataAccess {
 		this.sequelize.close();
 	}
 
+	public async getPatientById(id: number): Promise<Patient> {
+		return Patient.findOne({where: {id}});
+	}
+
 	public async getPatienten(): Promise<Patient[]> {
 		return Patient.findAll();
 	}
 
-	public async create(patient: any): Promise<Patient> {
+	public async createPatient(patient: any): Promise<Patient> {
 		return Patient.create(patient);
+	}
+
+	public async updatePatient(patient: any): Promise<[number, Patient[]]> {
+		return Patient.update({name: patient.name}, {where: {id: patient.id}});
 	}
 
 	private async initDb() {

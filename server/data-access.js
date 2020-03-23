@@ -30,14 +30,24 @@ class DataAccess {
     quit() {
         this.sequelize.close();
     }
+    getPatientById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.findOne({ where: { id } });
+        });
+    }
     getPatienten() {
         return __awaiter(this, void 0, void 0, function* () {
             return patient_1.Patient.findAll();
         });
     }
-    create(patient) {
+    createPatient(patient) {
         return __awaiter(this, void 0, void 0, function* () {
             return patient_1.Patient.create(patient);
+        });
+    }
+    updatePatient(patient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.update({ name: patient.name }, { where: { id: patient.id } });
         });
     }
     initDb() {
