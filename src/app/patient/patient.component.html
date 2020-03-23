@@ -29,24 +29,24 @@
 	[formGroup]="patientFormGroup"
 	(ngSubmit)="onSubmit()"
 >
-	<h1>Patient erstellen</h1>
+	<h1>{{ patient ? 'Patient #' + patient.id + ' bearbeiten' : 'Patient erstellen' }}</h1>
 
-	<span class="ui-float-label">
-    <input
-	    id="nameInput"
-	    formControlName="name"
-	    type="text"
-	    size="30"
-	    pInputText
-	    required
-    >
-    <label for="nameInput">Name</label>
-	</span>
+	<div class="input-field">
+		<label for="nameInput">Name</label>
+		<input
+			id="nameInput"
+			formControlName="name"
+			type="text"
+			size="30"
+			pInputText
+			required
+		>
+	</div>
 
 	<button
 		pButton
 		type="submit"
-		label="Patient erstellen"
+		[label]=" patient ? 'Patient speichern' : 'Patient erstellen'"
 		[icon]="isTxInProgress ? 'pi pi-spin pi-spinner' : 'pi pi-save'"
 		[disabled]="!patientFormGroup.valid || isTxInProgress"
 	></button>
