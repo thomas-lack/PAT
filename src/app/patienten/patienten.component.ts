@@ -24,7 +24,6 @@ export class PatientenComponent implements OnInit {
 	}
 
 	onBackButtonClick() {
-		console.log("1");
 		this.router.navigate(["/"]);
 	}
 }

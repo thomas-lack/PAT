@@ -44,7 +44,7 @@
 		pTemplate="body"
 		let-patient
 	>
-		<tr>
+		<tr [routerLink]="['/patient', patient.id]">
 			<td>{{patient.name}}</td>
 			<td>{{patient.creationDate | date:"short":undefined:"de-DE"}}</td>
 			<td>{{patient.updatedOn | date:"short":undefined:"de-DE"}}</td>
