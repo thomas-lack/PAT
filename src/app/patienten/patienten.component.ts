@@ -20,7 +20,7 @@ export class PatientenComponent implements OnInit {
 		{
 			label: "Bearbeiten",
 			icon: "pi pi-fw pi-pencil",
-			command: (event) => this.onPatientBearbeitenClick(this.selectedPatient),
+			command: () => this.onPatientBearbeitenClick(this.selectedPatient),
 		},
 		{
 			label: "Löschen",
