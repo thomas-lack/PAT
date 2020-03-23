@@ -1,7 +1,7 @@
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ButtonModule, InputTextModule, ProgressSpinnerModule, TableModule, ToastModule, ToolbarModule} from "primeng";
+import {ButtonModule, ContextMenuModule, InputTextModule, ProgressSpinnerModule, TableModule, ToastModule, ToolbarModule} from "primeng";
 
 import {PageNotFoundComponent} from "./components/";
 import {WebviewDirective} from "./directives/";
@@ -16,6 +16,7 @@ import {BackButtonDirective} from "./directives/backButton/back-button.directive
 	imports: [
 		ButtonModule,
 		CommonModule,
+		ContextMenuModule,
 		InputTextModule,
 		FormsModule,
 		ProgressSpinnerModule,
@@ -27,6 +28,7 @@ import {BackButtonDirective} from "./directives/backButton/back-button.directive
 	exports: [
 		BackButtonDirective,
 		ButtonModule,
+		ContextMenuModule,
 		FormsModule,
 		InputTextModule,
 		ProgressSpinnerModule,
