@@ -48,9 +48,6 @@ testem.log
 /typings
 package-lock.json
 
-# Database File
-pat.db
-
 # System Files
 .DS_Store
 Thumbs.db
