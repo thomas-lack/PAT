@@ -41,6 +41,10 @@ export class DataAccess {
 		return Patient.update({name: patient.name}, {where: {id: patient.id}});
 	}
 
+	public async destroyPatient(patient: any): Promise<number> {
+		return Patient.destroy({where: {id: patient.id}});
+	}
+
 	private async initDb() {
 		try {
 			await this.sequelize.sync();

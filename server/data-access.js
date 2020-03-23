@@ -50,6 +50,11 @@ class DataAccess {
             return patient_1.Patient.update({ name: patient.name }, { where: { id: patient.id } });
         });
     }
+    destroyPatient(patient) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return patient_1.Patient.destroy({ where: { id: patient.id } });
+        });
+    }
     initDb() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
