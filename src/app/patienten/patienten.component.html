@@ -32,9 +32,14 @@
 	</div>
 </p-toolbar>
 
-<p-table [value]="patienten | async">
+<p-table
+	[value]="patienten | async"
+	[(contextMenuSelection)]="selectedPatient"
+	[contextMenu]="cm"
+>
 	<ng-template pTemplate="header">
 		<tr>
+			<th>Id</th>
 			<th>Name</th>
 			<th>Erstellt</th>
 			<th>Geändert</th>
@@ -44,10 +49,16 @@
 		pTemplate="body"
 		let-patient
 	>
-		<tr [routerLink]="['/patient', patient.id]">
+		<tr [pContextMenuRow]="patient">
+			<td>{{patient.id}}</td>
 			<td>{{patient.name}}</td>
 			<td>{{patient.creationDate | date:"short":undefined:"de-DE"}}</td>
 			<td>{{patient.updatedOn | date:"short":undefined:"de-DE"}}</td>
 		</tr>
 	</ng-template>
 </p-table>
+
+<p-contextMenu
+	#cm
+	[model]="editMenuItems"
+></p-contextMenu>
