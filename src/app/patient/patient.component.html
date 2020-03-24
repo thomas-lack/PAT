@@ -15,18 +15,81 @@
 	[formGroup]="patientFormGroup"
 	(ngSubmit)="onSubmit()"
 >
-	<h1>{{ patient ? 'Patient #' + patient.id + ' bearbeiten' : 'Patient erstellen' }}</h1>
+	<h1>{{ patient
+		? 'Patient #' + patient.id + ' bearbeiten'
+		: 'Patient erstellen' }}</h1>
 
 	<div class="input-field">
-		<label for="nameInput">Name</label>
-		<input
-			id="nameInput"
-			formControlName="name"
-			type="text"
-			size="30"
-			pInputText
-			required
-		>
+		<label for="chiffreInput">Chiffre</label> <input
+		id="chiffreInput"
+		formControlName="chiffre"
+		type="text"
+		size="30"
+		pInputText
+		required
+	>
+	</div>
+
+	<div class="input-field">
+		<label for="nameInput">Name</label> <input
+		id="nameInput"
+		formControlName="name"
+		type="text"
+		size="30"
+		pInputText
+		required
+	>
+	</div>
+
+	<div class="input-field">
+		<label for="antragsdatumInput">Antragsdatum</label>
+		<p-calendar
+			id="antragsdatumInput"
+			formControlName="antragsdatum"
+			dateFormat="dd.mm.yy"
+			[locale]="calendarLocale"
+			[showIcon]="true"
+		></p-calendar>
+	</div>
+
+	<div class="input-field">
+		<label for="telefonInput">Telefon</label> <input
+		id="telefonInput"
+		formControlName="telefon"
+		type="text"
+		size="30"
+		pInputText
+	>
+	</div>
+
+	<div class="input-field">
+		<label for="konsiliararztInput">Konsiliararzt</label> <input
+		id="konsiliararztInput"
+		formControlName="konsiliararzt"
+		type="text"
+		size="30"
+		pInputText
+	>
+	</div>
+
+	<div class="input-field">
+		<label for="diagnoseInput">Diagnose</label> <input
+		id="diagnoseInput"
+		formControlName="diagnose"
+		type="text"
+		size="30"
+		pInputText
+	>
+	</div>
+
+	<div class="input-field">
+		<label for="bemerkungInput">Bemerkung</label> <textarea
+		id="bemerkungInput"
+		formControlName="bemerkung"
+		rows="5"
+		cols="30"
+		pInputTextarea
+	></textarea>
 	</div>
 
 	<button
@@ -37,3 +100,27 @@
 		[disabled]="!patientFormGroup.valid || isTxInProgress"
 	></button>
 </form>
+
+<div class="top60" *ngIf="patient">
+	<div class="input-field">
+		<label for="creationDateInput">Erstellt</label> <input
+		id="creationDateInput"
+		type="text"
+		size="30"
+		[value]="patient.creationDate | date:'dd.MM.yyyy':undefined:'de-DE'"
+		pInputText
+		disabled
+	>
+	</div>
+
+	<div class="input-field">
+		<label for="updatedOnInput">Zuletzt geändert</label> <input
+		id="updatedOnInput"
+		type="text"
+		size="30"
+		[value]="patient.updatedOn | date:'dd.MM.yyyy':undefined:'de-DE'"
+		pInputText
+		disabled
+	>
+	</div>
+</div>

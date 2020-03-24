@@ -6,7 +6,26 @@ export class Patient extends Model<Patient> {
 	@AllowNull(false)
 	@Unique
 	@Column
+	chiffre!: string;
+
+	@AllowNull(false)
+	@Column
 	name!: string;
+
+	@Column
+	antragsdatum: Date;
+
+	@Column
+	telefon: string;
+
+	@Column
+	konsiliararzt: string;
+
+	@Column
+	diagnose: string;
+
+	@Column
+	bemerkung: string;
 
 	@CreatedAt
 	creationDate!: Date;

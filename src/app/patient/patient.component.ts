@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {PatientenService} from "../patienten/patienten.service";
+import {calendarLocale} from "../shared/calendar/calendar-locale";
 import {Patient} from "./patient.interface";
 
 @Component({
@@ -16,6 +17,8 @@ export class PatientComponent implements OnInit {
 	public patient: Patient;
 
 	public isTxInProgress = false;
+
+	public calendarLocale = calendarLocale;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -53,7 +56,13 @@ export class PatientComponent implements OnInit {
 	}
 
 	private async updatePatient() {
+		this.patient.chiffre = this.patientFormGroup.value.chiffre;
 		this.patient.name = this.patientFormGroup.value.name;
+		this.patient.antragsdatum = this.patientFormGroup.value.antragsdatum;
+		this.patient.telefon = this.patientFormGroup.value.telefon;
+		this.patient.konsiliararzt = this.patientFormGroup.value.konsiliararzt;
+		this.patient.diagnose = this.patientFormGroup.value.diagnose;
+		this.patient.bemerkung = this.patientFormGroup.value.bemerkung;
 		await this.patientenService.update(this.patient);
 	}
 
@@ -64,16 +73,31 @@ export class PatientComponent implements OnInit {
 
 	private initEmptyFormGroup() {
 		this.patientFormGroup = this.formBuilder.group({
+			chiffre: [
+				"",
+				Validators.required,
+			],
 			name: [
 				"",
 				Validators.required,
 			],
+			antragsdatum: [""],
+			telefon: [""],
+			konsiliararzt: [""],
+			diagnose: [""],
+			bemerkung: [""],
 		});
 	}
 
 	private updateFormGroupFromPatient(patient: Patient) {
 		this.patientFormGroup.setValue({
+			chiffre: patient.chiffre,
 			name: patient.name,
+			antragsdatum: patient.antragsdatum,
+			telefon: patient.telefon,
+			konsiliararzt: patient.konsiliararzt,
+			diagnose: patient.diagnose,
+			bemerkung: patient.bemerkung,
 		});
 	}
 }

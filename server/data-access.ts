@@ -3,6 +3,7 @@ import {Sequelize} from "sequelize-typescript";
 import {Patient} from "./patient";
 
 const DATABASE_PATH = `${app.getPath("userData")}/databases/pat.db`;
+console.log("DATABASE_PATH: ", DATABASE_PATH);
 
 export class DataAccess {
 
@@ -38,7 +39,16 @@ export class DataAccess {
 	}
 
 	public async updatePatient(patient: any): Promise<[number, Patient[]]> {
-		return Patient.update({name: patient.name}, {where: {id: patient.id}});
+		console.log(patient.dataValues);
+		return Patient.update({
+			chiffre: patient.chiffre,
+			name: patient.name,
+			antragsdatum: patient.antragsdatum,
+			telefon: patient.telefon,
+			konsiliararzt: patient.konsiliararzt,
+			diagnose: patient.diagnose,
+			bemerkung: patient.bemerkung,
+		}, {where: {id: patient.id}});
 	}
 
 	public async destroyPatient(patient: any): Promise<number> {
