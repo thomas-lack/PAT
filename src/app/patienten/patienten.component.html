@@ -26,9 +26,13 @@
 	<ng-template pTemplate="header">
 		<tr>
 			<th>Id</th>
+			<th>Chiffre</th>
 			<th>Name</th>
-			<th>Erstellt</th>
-			<th>Geändert</th>
+			<th>Antragsdatum</th>
+			<th>Telefonnr.</th>
+			<th>Konsiliararzt</th>
+			<th>Diagnose</th>
+			<th>Bemerkung</th>
 		</tr>
 	</ng-template>
 	<ng-template
@@ -37,9 +41,13 @@
 	>
 		<tr [pContextMenuRow]="patient">
 			<td>{{patient.id}}</td>
+			<td>{{patient.chiffre}}</td>
 			<td>{{patient.name}}</td>
-			<td>{{patient.creationDate | date:"short":undefined:"de-DE"}}</td>
-			<td>{{patient.updatedOn | date:"short":undefined:"de-DE"}}</td>
+			<td>{{patient.antragsdatum | date:"dd.MM.yyyy":undefined:"de-DE"}}</td>
+			<td>{{patient.telefon}}</td>
+			<td>{{patient.konsiliararzt}}</td>
+			<td>{{patient.diagnose}}</td>
+			<td>{{patient.bemerkung}}</td>
 		</tr>
 	</ng-template>
 </p-table>

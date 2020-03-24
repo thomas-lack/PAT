@@ -17,7 +17,32 @@ __decorate([
     sequelize_typescript_1.Unique,
     sequelize_typescript_1.Column,
     __metadata("design:type", String)
+], Patient.prototype, "chiffre", void 0);
+__decorate([
+    sequelize_typescript_1.AllowNull(false),
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
 ], Patient.prototype, "name", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", Date)
+], Patient.prototype, "antragsdatum", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
+], Patient.prototype, "telefon", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
+], Patient.prototype, "konsiliararzt", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
+], Patient.prototype, "diagnose", void 0);
+__decorate([
+    sequelize_typescript_1.Column,
+    __metadata("design:type", String)
+], Patient.prototype, "bemerkung", void 0);
 __decorate([
     sequelize_typescript_1.CreatedAt,
     __metadata("design:type", Date)

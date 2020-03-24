@@ -13,6 +13,7 @@ const electron_1 = require("electron");
 const sequelize_typescript_1 = require("sequelize-typescript");
 const patient_1 = require("./patient");
 const DATABASE_PATH = `${electron_1.app.getPath("userData")}/databases/pat.db`;
+console.log("DATABASE_PATH: ", DATABASE_PATH);
 class DataAccess {
     constructor() {
         try {
@@ -47,7 +48,16 @@ class DataAccess {
     }
     updatePatient(patient) {
         return __awaiter(this, void 0, void 0, function* () {
-            return patient_1.Patient.update({ name: patient.name }, { where: { id: patient.id } });
+            console.log(patient.dataValues);
+            return patient_1.Patient.update({
+                chiffre: patient.chiffre,
+                name: patient.name,
+                antragsdatum: patient.antragsdatum,
+                telefon: patient.telefon,
+                konsiliararzt: patient.konsiliararzt,
+                diagnose: patient.diagnose,
+                bemerkung: patient.bemerkung,
+            }, { where: { id: patient.id } });
         });
     }
     destroyPatient(patient) {
