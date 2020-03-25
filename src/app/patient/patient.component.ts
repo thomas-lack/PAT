@@ -81,7 +81,6 @@ export class PatientComponent implements OnInit {
 				"",
 				Validators.required,
 			],
-			antragsdatum: [""],
 			telefon: [""],
 			konsiliararzt: [""],
 			diagnose: [""],
@@ -93,7 +92,6 @@ export class PatientComponent implements OnInit {
 		this.patientFormGroup.setValue({
 			chiffre: patient.chiffre,
 			name: patient.name,
-			antragsdatum: patient.antragsdatum,
 			telefon: patient.telefon,
 			konsiliararzt: patient.konsiliararzt,
 			diagnose: patient.diagnose,

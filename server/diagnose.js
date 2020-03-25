@@ -10,47 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
-const diagnose_1 = require("./diagnose");
+const patient_1 = require("./patient");
 const patient_diagnose_1 = require("./patient-diagnose");
-let Patient = class Patient extends sequelize_typescript_1.Model {
+let Diagnose = class Diagnose extends sequelize_typescript_1.Model {
 };
 __decorate([
     sequelize_typescript_1.AllowNull(false),
     sequelize_typescript_1.Unique,
     sequelize_typescript_1.Column,
     __metadata("design:type", String)
-], Patient.prototype, "chiffre", void 0);
+], Diagnose.prototype, "name", void 0);
 __decorate([
-    sequelize_typescript_1.AllowNull(false),
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Patient.prototype, "name", void 0);
-__decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Patient.prototype, "telefon", void 0);
-__decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Patient.prototype, "konsiliararzt", void 0);
-__decorate([
-    sequelize_typescript_1.BelongsToMany(() => diagnose_1.Diagnose, () => patient_diagnose_1.PatientDiagnose),
+    sequelize_typescript_1.BelongsToMany(() => patient_1.Patient, () => patient_diagnose_1.PatientDiagnose),
     __metadata("design:type", Array)
-], Patient.prototype, "diagnoses", void 0);
-__decorate([
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Patient.prototype, "bemerkung", void 0);
+], Diagnose.prototype, "patients", void 0);
 __decorate([
     sequelize_typescript_1.CreatedAt,
     __metadata("design:type", Date)
-], Patient.prototype, "creationDate", void 0);
+], Diagnose.prototype, "creationDate", void 0);
 __decorate([
     sequelize_typescript_1.UpdatedAt,
     __metadata("design:type", Date)
-], Patient.prototype, "updatedOn", void 0);
-Patient = __decorate([
+], Diagnose.prototype, "updatedOn", void 0);
+Diagnose = __decorate([
     sequelize_typescript_1.Table
-], Patient);
-exports.Patient = Patient;
-//# sourceMappingURL=patient.js.map
+], Diagnose);
+exports.Diagnose = Diagnose;
+//# sourceMappingURL=diagnose.js.map

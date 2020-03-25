@@ -1,6 +1,10 @@
 import {app, BrowserWindow, screen} from "electron";
 import * as path from "path";
+import {Sequelize} from "sequelize-typescript";
 import * as url from "url";
+import {Diagnose} from "./server/diagnose";
+import {Patient} from "./server/patient";
+import {PatientDiagnose} from "./server/patient-diagnose";
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1);
@@ -51,12 +55,41 @@ function createWindow(): BrowserWindow {
 	return win;
 }
 
+const PROD_DATABASE_PATH_PREFIX = `${app.getPath("userData")}/databases/`;
+const DEV_DATABASE_PATH_PREFIX = "./";
+const DATABASE_FILE_NAME = "pat.db";
+let sequelize: Sequelize;
+
+async function initDatabase() {
+	try {
+		const databasePath = serve
+			? DEV_DATABASE_PATH_PREFIX + DATABASE_FILE_NAME
+			: PROD_DATABASE_PATH_PREFIX + DATABASE_FILE_NAME;
+		if (serve) {
+			console.log("USING DB: ", databasePath);
+		}
+		sequelize = new Sequelize({
+			dialect: "sqlite",
+			storage: databasePath,
+			models: [
+				Patient,
+				Diagnose,
+				PatientDiagnose,
+			],
+		});
+		await sequelize.sync();
+	} catch (e) {
+		console.error(e);
+	}
+}
+
 try {
 
 	// This method will be called when Electron has finished
 	// initialization and is ready to create browser windows.
 	// Some APIs can only be used after this event occurs.
 	app.on("ready", createWindow);
+	app.on("ready", initDatabase);
 
 	// Quit when all windows are closed.
 	app.on("window-all-closed", () => {
@@ -65,6 +98,10 @@ try {
 		if (process.platform !== "darwin") {
 			app.quit();
 		}
+	});
+
+	app.on("quit", () => {
+		sequelize.close();
 	});
 
 	app.on("activate", () => {
@@ -76,6 +113,6 @@ try {
 	});
 
 } catch (e) {
-	// Catch Error
+	console.error(e);
 	// throw e;
 }

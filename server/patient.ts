@@ -1,4 +1,6 @@
-import {AllowNull, Column, CreatedAt, Model, Table, Unique, UpdatedAt} from "sequelize-typescript";
+import {AllowNull, BelongsToMany, Column, CreatedAt, HasMany, Model, Table, Unique, UpdatedAt} from "sequelize-typescript";
+import {Diagnose} from "./diagnose";
+import {PatientDiagnose} from "./patient-diagnose";
 
 @Table
 export class Patient extends Model<Patient> {
@@ -13,16 +15,13 @@ export class Patient extends Model<Patient> {
 	name!: string;
 
 	@Column
-	antragsdatum: Date;
-
-	@Column
 	telefon: string;
 
 	@Column
-	konsiliararzt: string;
+	konsiliararzt!: string;
 
-	@Column
-	diagnose: string;
+	@BelongsToMany(() => Diagnose, () => PatientDiagnose)
+	diagnoses: Diagnose[];
 
 	@Column
 	bemerkung: string;

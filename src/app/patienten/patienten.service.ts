@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {MessageService} from "primeng";
 import {from, Observable} from "rxjs";
 import {Model} from "sequelize-typescript";
-import {DataAccess} from "../../../server/data-access";
+import {DataAccessPatient} from "../../../server/data-access-patient";
 import {ElectronService} from "../electron/electron.service";
 import {Patient} from "../patient/patient.interface";
 
@@ -11,27 +11,27 @@ import {Patient} from "../patient/patient.interface";
 })
 export class PatientenService {
 
-	private readonly dataAccess: DataAccess;
+	private readonly dataAccess: DataAccessPatient;
 
 	constructor(
 		private electronService: ElectronService,
 		private messageService: MessageService,
 	) {
-		const DataAccessModule = electronService.remote.require("./server/data-access");
-		this.dataAccess = new DataAccessModule.DataAccess();
+		const DataAccessModule = electronService.remote.require("./server/data-access-patient");
+		this.dataAccess = new DataAccessModule.DataAccessPatient();
 	}
 
 	public getPatientById(id: number): Observable<any> {
-		return from(this.dataAccess.getPatientById(id));
+		return from(this.dataAccess.getById(id));
 	}
 
 	public getPatienten(): Observable<any> {
-		return from(this.dataAccess.getPatienten());
+		return from(this.dataAccess.read());
 	}
 
 	public async create(patient: Patient) {
 		try {
-			const persistedPatient: Model = await this.dataAccess.createPatient(patient);
+			const persistedPatient: Model = await this.dataAccess.create(patient);
 			this.messageService.add({
 				severity: "success",
 				summary: "Patient erfolgreich angelegt",
@@ -47,7 +47,7 @@ export class PatientenService {
 
 	public async update(patient: Patient) {
 		try {
-			const persistedPatient = await this.dataAccess.updatePatient(patient);
+			const persistedPatient = await this.dataAccess.update(patient);
 			this.messageService.add({
 				severity: "success",
 				summary: "Patient erfolgreich bearbeitet",
@@ -63,7 +63,7 @@ export class PatientenService {
 
 	public async destroy(patient: Patient) {
 		try {
-			const destroyedPatient = await this.dataAccess.destroyPatient(patient);
+			const destroyedPatient = await this.dataAccess.destroy(patient);
 			this.messageService.add({
 				severity: "success",
 				summary: "Patient erfolgreich gelöscht",
