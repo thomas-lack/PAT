@@ -21,11 +21,11 @@ export class PatientenService {
 		this.dataAccess = new DataAccessModule.DataAccessPatient();
 	}
 
-	public getPatientById(id: number): Observable<any> {
+	public getById(id: number): Observable<any> {
 		return from(this.dataAccess.getById(id));
 	}
 
-	public getPatienten(): Observable<any> {
+	public read(): Observable<any> {
 		return from(this.dataAccess.read());
 	}
 

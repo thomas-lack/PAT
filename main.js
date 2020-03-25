@@ -68,7 +68,9 @@ function initDatabase() {
             const databasePath = serve
                 ? DEV_DATABASE_PATH_PREFIX + DATABASE_FILE_NAME
                 : PROD_DATABASE_PATH_PREFIX + DATABASE_FILE_NAME;
-            console.log("USING DB: ", databasePath);
+            if (serve) {
+                console.log("USING DB: ", databasePath);
+            }
             sequelize = new sequelize_typescript_1.Sequelize({
                 dialect: "sqlite",
                 storage: databasePath,

@@ -5,11 +5,13 @@ import {NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MessageService} from "primeng";
 import "reflect-metadata";
 import "../polyfills";
-import {MessageService} from "primeng";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
+import {DiagnoseComponent} from "./diagnose/diagnose.component";
+import {DiagnosenComponent} from "./diagnosen/diagnosen.component";
 import {ElectronService} from "./electron/electron.service";
 import {HomeModule} from "./home/home.module";
 import {PatientComponent} from "./patient/patient.component";
@@ -21,6 +23,8 @@ registerLocaleData(localeDe, "de-DE");
 @NgModule({
 	declarations: [
 		AppComponent,
+		DiagnoseComponent,
+		DiagnosenComponent,
 		PatientComponent,
 		PatientenComponent,
 	],

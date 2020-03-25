@@ -32,7 +32,7 @@ export class PatientComponent implements OnInit {
 
 		const id = this.activatedRoute.snapshot.params.id;
 		if (id) {
-			this.patientenService.getPatientById(id)
+			this.patientenService.getById(id)
 				.subscribe((patient: Patient) => {
 					this.patient = patient;
 					this.updateFormGroupFromPatient(patient);

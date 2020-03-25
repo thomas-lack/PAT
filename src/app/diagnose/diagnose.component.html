@@ -1,0 +1,64 @@
+<p-toolbar>
+	<div class="ui-toolbar-group-left">
+		<button
+			pButton
+			type="button"
+			label="Zurück"
+			icon="pi pi-arrow-left"
+			class="ui-button-secondary"
+			patBackButton
+		></button>
+	</div>
+</p-toolbar>
+
+<form
+	[formGroup]="diagnoseFormGroup"
+	(ngSubmit)="onSubmit()"
+>
+	<h1>{{ diagnose
+		? 'Diagnose #' + diagnose.id + ' bearbeiten'
+		: 'Diagnose erstellen' }}</h1>
+
+	<div class="input-field">
+		<label for="nameInput">Name</label> <input
+		id="nameInput"
+		formControlName="name"
+		type="text"
+		size="30"
+		pInputText
+		required
+	>
+	</div>
+
+	<button
+		pButton
+		type="submit"
+		[label]=" diagnose ? 'Diagnose speichern' : 'Diagnose erstellen'"
+		[icon]="isTxInProgress ? 'pi pi-spin pi-spinner' : 'pi pi-save'"
+		[disabled]="!diagnoseFormGroup.valid || isTxInProgress"
+	></button>
+</form>
+
+<div class="top60" *ngIf="diagnose">
+	<div class="input-field">
+		<label for="creationDateInput">Erstellt</label> <input
+		id="creationDateInput"
+		type="text"
+		size="30"
+		[value]="diagnose.creationDate | date:'dd.MM.yyyy':undefined:'de-DE'"
+		pInputText
+		disabled
+	>
+	</div>
+
+	<div class="input-field">
+		<label for="updatedOnInput">Zuletzt geändert</label> <input
+		id="updatedOnInput"
+		type="text"
+		size="30"
+		[value]="diagnose.updatedOn | date:'dd.MM.yyyy':undefined:'de-DE'"
+		pInputText
+		disabled
+	>
+	</div>
+</div>

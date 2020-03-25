@@ -39,12 +39,8 @@ export class PatientenComponent implements OnInit {
 		this.getPatienten();
 	}
 
-	onBackButtonClick() {
-		this.router.navigate(["/"]);
-	}
-
 	private getPatienten() {
-		this.patienten = this.patientenService.getPatienten();
+		this.patienten = this.patientenService.read();
 	}
 
 	private onEditPatientClick(patient: Patient) {
